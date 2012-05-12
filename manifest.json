@@ -7,7 +7,7 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"http://www.youtube.com/watch*"
+				"http://*"
 			],
 			"css": ["css/styles.css"],
 			"js": ["js/jquery.min.js", "js/app.js", "js/init.js"] // add others here if you like, i.e. jquery...

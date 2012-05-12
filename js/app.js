@@ -7,7 +7,14 @@ var App = function() {
 	var 
 		_this = this,
 		defaults = JSON.parse(_defaultValue()),
-		containerHeight;
+		containerHeight,
+		host = window.location.href;
+
+	var re = new RegExp(defaults.match);
+	var matches = host.match(re);
+
+	if (matches === null)
+		return;
 
 	$(document.createElement('style'))
 		.attr('type', 'text/css')
@@ -26,7 +33,7 @@ var App = function() {
 		.appendTo($container);
 
 	var $iframe = $(document.createElement('iframe'))
-		.attr('src', defaults.url)
+		.attr('src', _getUrl(defaults.url, matches))
 		.appendTo($container);
 
 	this.state = defaults.state || 'close';
@@ -34,6 +41,14 @@ var App = function() {
 	$toggleBtn.on('click', function() {
 		_this.toggle();
 	});
+
+	function _getUrl(url, match) {
+		$.each(match, function(index) {
+			url = url.replace("#{"+index+"}", match[index]);
+		});
+
+		return url;
+	}
 
 	function _defaultValue() {
 		return localStorage['iframe.config'];
@@ -64,7 +79,7 @@ var App = function() {
 			_this.close();
 		else
 			_this.open();
-	}
+	};
 
 	this.init = function() {
 		$container.fadeIn('fast');

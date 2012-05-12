@@ -2,12 +2,14 @@ var options = {
 	$url: null,
 	$styles: null,
 	$containerId: null,
+	$match: null,
 
 	init: function() {
 		var _this = this;
+		this.$containerId = $(".containerId");
+		this.$match = $(".match");
 		this.$url = $(".url");
 		this.$styles = $(".styles");
-		this.$containerId = $(".containerId");
 
 		this.save('iframe.defaults');
 
@@ -26,9 +28,10 @@ var options = {
 
 		// console.log('save');
 		localStorage[type] = JSON.stringify({
+			containerId: this.$containerId.val(),
+			match: this.$match.val(),
 			url: this.$url.val(),
-			styles: this.$styles.text(),
-			containerId: this.$containerId.val()
+			styles: this.$styles.text()
 		});
 	},
 
@@ -41,9 +44,10 @@ var options = {
 
 		// console.log('restore');
 		var defaults = JSON.parse(localStorage[type]);
+		this.$containerId.val(defaults.containerId);
+		this.$match.val(defaults.match);
 		this.$url.val(defaults.url);
 		this.$styles.text(defaults.styles);
-		this.$containerId.val(defaults.containerId);
 	},
 
 	hasLocalValue: function() {

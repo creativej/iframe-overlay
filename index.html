@@ -1,12 +1,14 @@
 <html>
 <head>
 	<title>insider test</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/app.js?test"></script>
 	<script type="text/javascript">
 		$(function(){
-			new App().init();
+			var app = new App();
+
+			if (app.init)
+				app.init();
 		});
 	</script>
 	<style type="text/css">
