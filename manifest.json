@@ -1,0 +1,25 @@
+{
+	"name": "Youtube overlay iframe extension",
+	"version": "0.1",
+	"description": "...",
+	"background_page": "background.html",
+	"options_page": "options.html",
+	"content_scripts": [
+		{
+			"matches": [
+				"http://www.youtube.com/watch*"
+			],
+			"css": ["css/styles.css"],
+			"js": ["js/jquery.min.js", "js/app.js", "js/init.js"] // add others here if you like, i.e. jquery...
+		}
+	],
+	"icons": {
+		// "48": "icon48.png",
+		// "128": "icon128.png" 
+	},
+	"permissions": [
+		// "tabs",
+		// "history",
+		// "notifications"
+	]
+}

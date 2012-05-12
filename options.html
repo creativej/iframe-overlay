@@ -1,0 +1,137 @@
+<html>
+<head>
+	<title>Options for iframe overlay</title>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/options.js"></script>
+	<style type="text/css">
+	.form {
+		width: 300px;
+		margin: 0 auto;
+	}
+
+	body {
+		font-family: Verdana;
+		padding: 0;
+		margin: 0;
+		background-color: #ddd;
+	}
+
+	h1 {
+		font-size: 18px;
+	}
+
+	.styles {
+		display: block;
+		width: 285px;
+		height: auto;
+		min-height: 200px;
+		border: #ddd 1px solid;
+		padding: 5px;
+	}
+
+	label {
+		margin-bottom: 10px;
+		display: block;
+		font-weight: bold;
+		font-size: 12px;
+	}
+
+	.form {
+		background-color: #fff;
+		padding: 10px;
+		border-radius: 0px 0px 5px 5px;
+		border: #ccc 1px solid;
+	}
+
+	input {
+		padding: 5px;
+		width: 295px;
+	}
+
+	.save {
+		margin-right: 20px;
+	}
+
+	.button {
+		-moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+		-webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+		box-shadow: inset 0px 1px 0px 0px #ffffff;
+		background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+		background: -moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+		background-color: #ededed;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 4px;
+		border: 1px solid #dcdcdc;
+		display: inline-block;
+		color: #777777;
+		font-family: arial;
+		font-size: 12px;
+		font-weight: bold;
+		padding: 2px 15px;
+		text-decoration: none;
+		text-shadow: 1px 1px 0px #ffffff;
+		cursor: pointer;
+	}
+	.button:hover {
+		background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+		background: -moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+		background-color: #dfdfdf;
+	}
+	.button:active {
+		position: relative;
+		top: 1px;
+	}
+	</style>
+</head>
+<body>
+	<div class="form">
+		<h1>iframe config</h1>
+		<label>#
+		<input name="containerId" value="iframe-container" placeholder="iframe-overlay" class="containerId" />
+		</label>
+
+		<label>Url
+		<input name="url" value="" placeholder="http://" class="url" />
+		</label>
+		<label>styles<pre class="styles" contenteditable="true">
+#iframe-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -512px;
+  width: 1024px;
+  height: 100px;
+  display: none;
+  text-align: right;
+}
+
+#iframe-container .toggle {
+  width: 50px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 5px 5px 0px 0px;
+  padding: 0px 10px 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+#iframe-container iframe {
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-top: black 2px solid;
+}</pre></label>
+
+		<div class="actions">
+			<button name="save" class="save button">Save</button>
+			<button name="reset" class="reset button">Reset</button>
+			<button name="restore" class="restore button">Restore default</button>
+		</div>
+	</div>
+</body>
+</html>
