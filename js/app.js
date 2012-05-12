@@ -1,46 +1,57 @@
 var App = function() {
-	if (typeof(_defaultValue()) === "undefined") {
-		console.log('please config the iframe first in your options page.');
-		return;
-	}
-
 	var 
 		_this = this,
-		defaults = JSON.parse(_defaultValue()),
-		containerHeight,
+		defaults,
+		$container,
+		$toggleBtn,
+		$iframe,
+		matches,
 		host = window.location.href;
 
-	var re = new RegExp(defaults.match);
-	var matches = host.match(re);
+	function _setup() {
+		if (typeof(_defaultValue()) === "undefined") {
+			console.log('please config the iframe first in your options page.');
+			return false;
+		}
+		
+		defaults = JSON.parse(_defaultValue());
+		_this.state = defaults.state || 'close';
 
-	if (matches === null)
-		return;
+		matches = host.match(new RegExp(defaults.match));
 
-	$(document.createElement('style'))
-		.attr('type', 'text/css')
-		.text(defaults.styles)
-		.appendTo('body');
+		if (matches === null)
+			return false;
 
-	var $container = $(document.createElement('div'))
-		.attr('id', defaults.containerId)
-		.css('display', 'none')
-		.appendTo('body');
+		_buildDoms();
 
-	containerHeight = $container.height();
+		$toggleBtn.on('click', function() {
+			_this.toggle();
+		});
 
-	var $toggleBtn = $(document.createElement('span'))
-		.addClass('toggle')
-		.appendTo($container);
+		return true;
+	}
 
-	var $iframe = $(document.createElement('iframe'))
-		.attr('src', _getUrl(defaults.url, matches))
-		.appendTo($container);
+	function _buildDoms() {
+		$(document.createElement('style'))
+			.attr('type', 'text/css')
+			.text(defaults.styles)
+			.appendTo('body');
 
-	this.state = defaults.state || 'close';
+		$container = $(document.createElement('div'))
+			.attr('id', defaults.containerId)
+			.css('display', 'none')
+			.appendTo('body')
+			.fadeIn('slow');
 
-	$toggleBtn.on('click', function() {
-		_this.toggle();
-	});
+		$toggleBtn = $(document.createElement('span'))
+			.addClass('toggle')
+			.appendTo($container);
+
+
+		$iframe = $(document.createElement('iframe'))
+			.attr('src', _getUrl(defaults.url, matches))
+			.appendTo($container);
+	}
 
 	function _getUrl(url, match) {
 		$.each(match, function(index) {
@@ -64,7 +75,7 @@ var App = function() {
 		$toggleBtn.text('close');
 		_this.state = "open";
 		_saveDefaultItem('state', _this.state);
-		$container.css('height', containerHeight + "px");
+		$container.css('height', $container.height() + "px");
 	};
 
 	this.close = function() {
@@ -82,11 +93,11 @@ var App = function() {
 	};
 
 	this.init = function() {
-		$container.fadeIn('fast');
-
-		if (_this.state === 'open')
-			_this.open();
-		else
-			_this.close();
+		if (_setup()) {
+			if (_this.state === 'open')
+				_this.open();
+			else
+				_this.close();
+		}
 	};
 };
