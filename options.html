@@ -20,15 +20,6 @@
 		font-size: 18px;
 	}
 
-	.styles {
-		display: block;
-		width: 285px;
-		height: auto;
-		min-height: 200px;
-		border: #ddd 1px solid;
-		padding: 5px;
-	}
-
 	label {
 		margin-bottom: 10px;
 		display: block;
@@ -89,46 +80,18 @@
 <body>
 	<div class="form">
 		<h1>iframe config</h1>
-		<label>#
-		<input name="containerId" value="iframe-container" placeholder="iframe-overlay" class="containerId" />
-		</label>
 		<label>Match
 		<input name="match" value="http://.*" placeholder="http://" class="match" />
 		</label>
 		<label>Url
 		<input name="url" value="" placeholder="http://" class="url" />
 		</label>
-		<label>styles<pre class="styles" contenteditable="true">
-#iframe-container {
-  position: absolute;
-  bottom: 21px;
-  left: 50%;
-  margin-left: -512px;
-  width: 1024px;
-  height: 100px;
-  display: none;
-  text-align: right;
-}
-
-#iframe-container .toggle {
-  width: 50px;
-  background-color: black;
-  color: white;
-  text-align: center;
-  border-radius: 5px 5px 0px 0px;
-  padding: 0px 10px 2px;
-  position: relative;
-  cursor: pointer;
-}
-
-#iframe-container iframe {
-  border: none;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-top: black 2px solid;
-}</pre></label>
-
+		<label>Width
+		<input name="width" value="450px" placeholder="450px" class="width"/>
+		</label>
+		<label>Height
+		<input name="height" value="150px" placeholder="150px" class="height"/>
+		</label>
 		<div class="actions">
 			<button name="save" class="save button">Save</button>
 			<button name="reset" class="reset button">Reset</button>

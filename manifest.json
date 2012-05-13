@@ -1,25 +1,15 @@
 {
 	"name": "Youtube overlay iframe extension",
 	"version": "0.1",
-	"description": "...",
+	"description": "Allows you to specify a website to show in your popup",
 	"background_page": "background.html",
 	"options_page": "options.html",
-	"content_scripts": [
-		{
-			"matches": [
-				"http://*"
-			],
-			"css": ["css/styles.css"],
-			"js": ["js/jquery.min.js", "js/app.js", "js/init.js"] // add others here if you like, i.e. jquery...
-		}
-	],
-	"icons": {
-		// "48": "icon48.png",
-		// "128": "icon128.png" 
+	"browser_action": {
+		"default_icon": "Like-32.png",
+		"default_popup": "popup.html",
+		"default_title": "like this video"
 	},
 	"permissions": [
-		// "tabs",
-		// "history",
-		// "notifications"
+		"tabs"
 	]
 }

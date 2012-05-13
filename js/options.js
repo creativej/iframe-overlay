@@ -1,53 +1,68 @@
 var options = {
-	$url: null,
-	$styles: null,
-	$containerId: null,
-	$match: null,
-
+	fields:{},
 	init: function() {
 		var _this = this;
-		this.$containerId = $(".containerId");
-		this.$match = $(".match");
-		this.$url = $(".url");
-		this.$styles = $(".styles");
 
-		this.save('iframe.defaults');
+		this.loadFields(['match', 'url', 'width', 'height']);
+		this.save('iframedefaults');
 
 		if (this.hasLocalValue())
 			this.save();
 		else
-			this.restore('iframe.config');
+			this.restore('iframeconfig');
 
 		$('.save').on('click', function() { _this.save() });
-		$('.reset').on('click', function() { _this.restore('iframe.config') });
+		$('.reset').on('click', function() { _this.restore('iframeconfig') });
 		$('.restore').on('click', function() { _this.restore() });
 	},
 
-	save: function(type) {
-		type = type || 'iframe.config';
+	loadFields: function(names) {
+		var _this = this;
 
-		// console.log('save');
-		localStorage[type] = JSON.stringify({
-			containerId: this.$containerId.val(),
-			match: this.$match.val(),
-			url: this.$url.val(),
-			styles: this.$styles.text()
+		$.each(names, function(index, name) {
+			_this.addField(name);
 		});
 	},
 
+	addField: function(name) {
+		this.fields[name] = $("." + name);
+	},
+
+	getField: function(name) {
+		return this.fields[name];
+	},
+
+	save: function(type) {
+		type = type || 'iframeconfig';
+
+		// console.log('save');
+		localStorage[type] = JSON.stringify(this.fieldsToObject());
+	},
+
+	fieldsToObject: function() {
+		var obj = {};
+		$.each(this.fields, function(index, $field) {
+			obj[index] = $field.val();
+		});
+		console.log(obj);
+		return obj;
+	},
+
 	localValue: function() {
-		return localStorage['iframe.config'];
+		return localStorage['iframeconfig'];
 	},
 
 	restore: function(type) {
-		type = type || 'iframe.defaults';
+		var _this = this;
+
+		type = type || 'iframedefaults';
 
 		// console.log('restore');
 		var defaults = JSON.parse(localStorage[type]);
-		this.$containerId.val(defaults.containerId);
-		this.$match.val(defaults.match);
-		this.$url.val(defaults.url);
-		this.$styles.text(defaults.styles);
+
+		$.each(this.fields, function(index, $field) {
+			$field.val(defaults[index]);
+		});
 	},
 
 	hasLocalValue: function() {
