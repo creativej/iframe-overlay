@@ -1,7 +1,7 @@
 {
-	"name": "Youtube overlay iframe extension",
+	"name": "Customisable iframe popup",
 	"version": "0.1",
-	"description": "Allows you to specify a website to show in your popup",
+	"description": "Chrome extension: Allows you to specify a website to show in your popup",
 	"background_page": "background.html",
 	"options_page": "options.html",
 	"browser_action": {
