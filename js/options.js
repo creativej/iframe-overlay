@@ -44,7 +44,7 @@ var options = {
 		$.each(this.fields, function(index, $field) {
 			obj[index] = $field.val();
 		});
-		console.log(obj);
+		// console.log(obj);
 		return obj;
 	},
 
